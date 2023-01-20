@@ -7,7 +7,7 @@ Text data analysis were performed in the training datasets. Analysis like title 
     \centering
     \includegraphics[scale = 0.6]{Basic Analysis/length of title based on character frequency.png}
     \caption{Title length based on number of characters
-    (Bi-modal Distribution)}
+        (Bi-modal Distribution)}
     \label{fig:Title length based on number of characters}
 \end{figure}
 
@@ -52,7 +52,7 @@ From the box plot, the average number of characters in a title in the training d
     \centering
     \includegraphics[scale = 0.6]{Basic Analysis/length of title based on word frequency.png}
     \caption{Title length based on word frequency
-    (Right Skewed Normal Distribution)}
+        (Right Skewed Normal Distribution)}
     \label{fig:Title length based on word frequency}
 \end{figure}
 
@@ -68,13 +68,13 @@ From the box plot Fig : \ref{fig:Box plot of title length based on word frequenc
             \hline
             standard deviation & 3.6153 \\
             \hline
-            minimum            & 1       \\
+            minimum            & 1      \\
             \hline
             first quartile     & 7      \\
             \hline
             median             & 9      \\
             \hline
-            third quartile     & 12      \\
+            third quartile     & 12     \\
             \hline
             maximum            & 39     \\
             \hline
@@ -103,7 +103,7 @@ For this report, word cloud is created using the title column of the training da
     \label{fig:Title Corpus Word Cloud}
 \end{figure}
 
-Let's view the word cloud on specific topics. 
+Let's view the word cloud on specific topics.
 
 \begin{figure}[H]
     \centering
@@ -141,9 +141,10 @@ Let's view the word cloud on specific topics.
     \label{fig:physics Corpus Word Cloud}
 \end{figure}
 
-\subsubsection{Inference from label based word cloud}
+\subsection{Inference from label based word cloud}
 From cs and stat word cloud, we can see lots of similar word in both labels like model, neural network, machine learning, network, data, distribution, etc. When looking on to the abstract of these labels, just by judging through the corpus, some of them were even hard for human to classify between them. Similar was the case with astro-ph and  physics which can be clearly visualized in the word cloud.
 
+\subsection{Minority class word cloud}
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.4]{Word Cloud/minority_class_word_cloud.png}
@@ -153,10 +154,10 @@ From cs and stat word cloud, we can see lots of similar word in both labels like
 
 Minority class includes labels with number of data less than 15000 in training datasets. The classes are q-bio, hep-ex,
 math-ph, nucl-th, nlin, q-fin, econ, nucl-ex, hep-lat, q-alg, funct-an,
-alg-geom
+and alg-geom.
 
 \section{N-gram Exploration}
-For the exploration of the most frequency unigram, stopwords were removed from the corpus created from the whole training corpus. Then, we got the count of all unique word from the corpus in a hash map. Using the hash map, we drew this bar graph by taking the top 40 most frequent words. The result is as follow : 
+For the exploration of the most frequency unigram, stopwords were removed from the corpus created from the whole training corpus. Then, we got the count of all unique word from the corpus in a hash map. Using the hash map, we drew this bar graph by taking the top 40 most frequent words. The result is as follow :
 
 \begin{figure}[H]
     \centering
@@ -166,17 +167,16 @@ For the exploration of the most frequency unigram, stopwords were removed from t
 \end{figure}
 
 
-
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.45]{N-gram/cropped_bigram_label.png}
+    \includegraphics[scale = 0.5]{N-gram/cropped_bigram_label.png}
     \caption{Most frequent bi-grams}
     \label{fig:Most frequent bi-grams}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.6]{N-gram/cropped_trigram_label.png}
+    \includegraphics[scale = 0.5]{N-gram/cropped_trigram_label.png}
     \caption{Most frequent tri-grams}
     \label{fig:Most frequent tri-grams}
 \end{figure}
@@ -184,5 +184,132 @@ For the exploration of the most frequency unigram, stopwords were removed from t
 
 
 \section{Named Entity Recognition}
+Named-entity recognition (NER) (also known as (named) entity identification, entity chunking, and entity extraction) is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, medical codes, time expressions, quantities, monetary values, percentages, etc. Following table shows the label of NER along with its description.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{NER/ner_spacy.png}
+    \caption{NER Label Description}
+    \label{fig:NER Label Description}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.33]{NER/ner.png}
+    \caption{NER Countplot}
+    \label{fig:NER Countplot}
+\end{figure}
+
+\subsection{NER Label Exploration}
+For the generation of following plot based on specific NER label, 50,000 sample were taken from the title column of the training dataset.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.33]{NER/top 20 most common in org ner.png}
+    \caption{Most common word in ORG NER}
+    \label{fig:Most common word in ORG NER}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.33]{NER/top 20 most common in PERSON NER.png}
+    \caption{Most common word in PERSON NER}
+    \label{fig:Most common word in PERSON NER}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.30]{NER/top 20 most common in work of art.png}
+    \caption{Most common words in WORK OF ART NER}
+    \label{fig:Most common words in WORK OF ART NER}
+\end{figure}
+
+\subsection{Inference from NER}
+From fig \ref{fig:NER Countplot}, it can be deduced that ORG highly dominate the title of the articles following PERSON, CARDINAL, etc.
+
 \section{Part of Speech Tagging}
+Parts of speech (POS) tagging is a method that assigns part of speech labels to words in a sentence.
+
+
+
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ |c|c| }
+            \hline
+            NNP & Proper Noun, Singular \\
+            \hline
+            NN & Noun, Singular \\
+            \hline
+            IN & Preposition or subordinating conjunction \\
+            \hline
+            JJ & Adjective \\
+            \hline
+            NNS & Noun, plural \\
+            \hline
+            DT & Determiner \\
+            \hline
+            CC & Coordinating conjunction \\
+            \hline
+            VBG & Verb, gerund or present participle \\
+            \hline 
+            : & Mid-sentence punctuation (: ; ... -- -) \\
+            \hline 
+            $\$$ & Currency Sign \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \caption{POS Label and Description}
+    \label{table:POS Label and Description}
+\end{table}
+
+
+\subsection{Label based POS exploration}
+For the POS exploration, 1,00,000 sample of data were taken from the training data whose distribution is shown in fig \ref{fig:1,00,000 sample data for POS}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.40]{POS/100_000 sample data for POS.png}
+    \caption{1,00,000 sample data for POS}
+    \label{fig:1,00,000 sample data for POS}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.32]{POS/part of speech tagging for 100_000 samples.png}
+    \caption{POS Countplot for the 1,00,000 sample data}
+    \label{fig:POS Countplot for the 1,00,000 sample data}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.7]{POS/top 10 preposition .png}
+    \caption{Top 10 preprosition in title}
+    \label{fig:Top 10 preprosition in title}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.42]{POS/top 20 nn words.png}
+    \caption{Top 20 NN in title}
+    \label{fig:Top 20 NN in title}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.42]{POS/top 20 nnp words.png}
+    \caption{Top 20 NNP in title}
+    \label{fig:Top 20 NNP in title}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.70]{POS/top jj words.png}
+    \caption{Top 10 JJ in title}
+    \label{fig:Top 10 JJ in title}
+\end{figure}
+
+\subsection{Inference from POS exploration}
+From fig \ref{fig:POS Countplot for the 1,00,000 sample data}, proper singular noun, prepositions and adjectives were found to dominate the title of the training data which are normally the case. In NNP count plot, most words were found to be from majority class as in fig \ref{fig:1,00,000 sample data for POS}.
 
