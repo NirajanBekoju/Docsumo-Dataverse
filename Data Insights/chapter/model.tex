@@ -206,6 +206,21 @@ The model summary was same as in transformer version 1. However, for training th
     \label{fig:Transformer V2 fbeta-score curve}
 \end{figure}
 
+\subsection{Pretrained BERT Model}
+For Bert, the pretrained model was taken from hugging face transformers. The sentences were tokenized using pretrained bert tokenizer.
+The pretrained encoding from model was taken, on top of which 3 layerd 
+multi-layered 
+perceptron of layer$\_$size 
+= (480,360,180) 
+was used with dropout layer(p = 0.1). The classification report was as follow:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Model_cr_summary/bert_cr.png}
+    \caption{Bert Classification Report}
+    \label{fig:Bert Model Classification Report}
+\end{figure}
+
 \section{Model Comparision}
 \begin{table}[H]
     \begin{center}
@@ -224,6 +239,8 @@ The model summary was same as in transformer version 1. However, for training th
             Transformer V1     & .88  & .69 & .87 \\
             \hline
             Transformer V2   &   .70   & .50 & .75 \\
+            \hline
+            BERT  &   .69   & .55 & .73 \\
             \hline
         \end{tabular}
     \end{center}
