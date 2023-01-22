@@ -54,7 +54,7 @@ From the above distribution of the text length for training data, we get the fol
 
 Hence, we choose MAX\_PAD\_LENGTH = 140 for the tokenization of the data training the LSTMs Deep Neural Networks.
 
-\subsection{Version 1}
+\subsection{LSTMs Version 1}
 Any label with count less than 5000 were over-sampled to 5000 and any label with count greater than 10,000 were under-sampled to 10,000 for training in this model. The model summary and the classification report are shown below.
 
 \begin{figure}[H]
@@ -71,7 +71,7 @@ Any label with count less than 5000 were over-sampled to 5000 and any label with
     \label{fig: Classification report for Version 1}
 \end{figure}
 
-\subsection{Version 2}
+\subsection{LSTMs Version 2}
 The model was same as in the Version 1. However, no. of LSTMs unit was reduced from 32 to 10 in this version and the result obtained were as follow. We can observe that the test accuracy improves from 0.53 to 0.68, macro average F1-score from 0.38 to 0.45.
 
 \begin{figure}[H]
@@ -119,6 +119,9 @@ The graph regarding loss, accuracy, f1-score and fbeta-score are as follow:
 \end{figure}
 
 \section{Transformer Model}
+For the test data while training transformer model, we observed that the 32,404 rows in test data are duplicates of the training data. Hence We removed those rows from the test data for creating the classification report.
+
+\subsection{Transformer Version 1}
 We can observe form the classification report that the accuracy improves to 0.69 and macro average f1-score to 0.46.
 
 \begin{figure}[H]
@@ -130,7 +133,7 @@ We can observe form the classification report that the accuracy improves to 0.69
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.6]{Model_cr_summary/transformer_v1_cr.png}
+    \includegraphics[scale = 0.6]{Model_cr_summary/transformer_v1_cr_no_rep.png}
     \caption{Transformer Classification report for Version 1}
     \label{fig:Transformer Classification report for Version 1}
 \end{figure}
@@ -164,4 +167,73 @@ The graph regarding loss, accuracy, f1-score and fbeta-score are as follow:
     \caption{Transformer V1 fbeta-score curve}
     \label{fig:Transformer V1 fbeta-score curve}
 \end{figure}
+
+\subsection{Transformer Version 2}
+The model summary was same as in transformer version 1. However, for training this model, we oversampled the label with count less than 1000 to 1000 and provided class weights using sklearn.utils.class$\_$weights. The classification report and model history curve are as follow:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.55]{Model_cr_summary/transformer_v2_cr.png}
+    \caption{Transformer Classification report for version 2}
+    \label{fig:Transformer Classification report for version 2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{training_testing/transformer_v2_loss.png}
+    \caption{Transformer V2 Loss curve}
+    \label{fig:Transformer V2 loss curve}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{training_testing/transformer_v2_accuracy.png}
+    \caption{Transformer V2 accuracy curve}
+    \label{fig:Transformer V2 accuracy curve}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{training_testing/transformer_v2_f1.png}
+    \caption{Transformer F2-score curve}
+    \label{fig:Transformer F2-score curve}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{training_testing/transformer_v2_beta.png}
+    \caption{Transformer V2 fbeta-score curve}
+    \label{fig:Transformer V2 fbeta-score curve}
+\end{figure}
+
+\section{Model Comparision}
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c| }
+            \hline
+            Model Name               & Accuracy & Macro Average & Weighted Average \\
+            \hline
+            Multinomial NB & 0.58 & 0.42 & 0.61\\
+            \hline
+            SVM            & 0.36       & 0.13 & 0.26\\
+            \hline
+            LSTMs V1    & 0.53      & 0.38 & 0.56\\
+            \hline
+            LSTMs V2    & 0.68  & 0.45 & 0.66\\
+            \hline
+            Transformer V1     & .88  & .69 & .87 \\
+            \hline
+            Transformer V2   &   .70   & .50 & .75 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \caption{Model Comparision based on classification report}
+    \label{table:Model Comparision based on classification report}
+\end{table}
+
+From the table \ref{table:Model Comparision based on classification report}, we found that transformer V1 is better than the transformer V2 and LSTMs V2 is better than LSTMs V1.
+
+In both LSTMs V1 and transformer V2, we did sampling and provided class weights for correcting the class imbalance. However the result was not good. This is because, the test data provided itself was highly imbalanced and biased toward the majority class as in training data which we can observe from the support column of the classification report. Hence, we got better accuracy and f1-score in the model when no sampling and class weights are provided as in the LSTMs V2 and transformer V1. 
+
+However, if the test data would have contained minority classes data too, then the result could change. 
 
