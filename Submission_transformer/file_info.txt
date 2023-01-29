@@ -1,0 +1,11 @@
+The version of different packages used are listed in submission.ipynb file. Run the ipynb files in google colab. 
+The files description are listed below:
+
+transformer_model_v1 : classifier model
+label_encoder.pickle : for label encoding of category column
+submission.csv : Test submission csv file created from submission.ipynb
+submission.ipynb : this file contains the way to evaluate the model and create submission.csv
+text_preprocessing.ipynb : Text preprocessing of train and test data
+tokenizer.pickle : Used for the tokenization of data
+transformer V1.ipynb : Main file to develop the model(All the label encoding, tokenization, model development are done in this file)
+Data Insights Report.pdf : Data Insights Report PDF

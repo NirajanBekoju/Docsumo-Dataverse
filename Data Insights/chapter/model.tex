@@ -1,23 +1,21 @@
 \chapter{Model Development and Evaluation}
-\section{Machine Learning Model}
-Support vector machine and Multinomial NB model were trained in the training dataset given. Test dataset was used for the validation and generation of the classification report which is as follow. Multinomial NB was found to be perfoming better on test dataset with accuracy 0.58, f1-score 0.42 and weighted averate f1-score of 0.61.
+\section{Text Preprocessing}
+For the preprocessing of the given data, the "title" and "abstract" column were joined to form a new colum "text". Then the preprocessing was done on the text column and feeded for tokenization process and model training process. Same was applied to the testing dataset as well.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.7]{Model_cr_summary/svm_rc.png}
-    \caption{SVM classification report}
-    \label{fig:SVM classification report}
-\end{figure}
+The steps taken to preprocess the text were as follow:
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.7]{Model_cr_summary/multinomial_nb_cr.png}
-    \caption{Multinomial NB classification report}
-    \label{fig:Multinomial NB classification report}
-\end{figure}
+\begin{enumerate}
+    \item Lower case the text 
+    \item Replace the "-" with white space 
+    \item Remove all the remaining punctuations from string.punctuation
+    \item Remove all the numbers and words containing numbers 
+    \item Lemmatize the words 
+    \item Return the sentences
+\end{enumerate}
 
+For further improvement in preprocessing, instead of remove the numbers we can provide  $\langle NUM \rangle$ token for the numbers and words containing numbers.
 
-\section{LSTMs Dense Neural Network}
+\section{Tokenization}
 For training purpose, title and abstract of the training data were concatenated whose length distribution are shown below.
 
 \begin{figure}[H]
@@ -54,6 +52,27 @@ From the above distribution of the text length for training data, we get the fol
 
 Hence, we choose MAX\_PAD\_LENGTH = 140 for the tokenization of the data training the LSTMs Deep Neural Networks.
 
+
+\section{Machine Learning Model}
+Support vector machine and Multinomial NB model were trained in the training dataset given. Test dataset was used for the validation and generation of the classification report which is as follow. Multinomial NB was found to be perfoming better on test dataset with accuracy 0.58, f1-score 0.42 and weighted averate f1-score of 0.61.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{Model_cr_summary/svm_rc.png}
+    \caption{SVM classification report}
+    \label{fig:SVM classification report}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{Model_cr_summary/multinomial_nb_cr.png}
+    \caption{Multinomial NB classification report}
+    \label{fig:Multinomial NB classification report}
+\end{figure}
+
+
+\section{LSTMs Dense Neural Network}
+
 \subsection{LSTMs Version 1}
 Any label with count less than 5000 were over-sampled to 5000 and any label with count greater than 10,000 were under-sampled to 10,000 for training in this model. The model summary and the classification report are shown below.
 
@@ -66,7 +85,7 @@ Any label with count less than 5000 were over-sampled to 5000 and any label with
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.7]{Model_cr_summary/sequential_v1_cr.png}
+    \includegraphics[scale = 0.6]{Model_cr_summary/sequential_v1_cr.png}
     \caption{Classification report for Version 1}
     \label{fig: Classification report for Version 1}
 \end{figure}
